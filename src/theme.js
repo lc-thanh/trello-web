@@ -21,10 +21,30 @@ const theme = extendTheme({
     }
   },
   components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          '*::-webkit-scrollbar': {
+            width: '8px',
+            height: '8px'
+          },
+          '*::-webkit-scrollbar-thumb': {
+            backgroundColor: '#bdc3c7',
+            borderRadius: '3px'
+          },
+          '*::-webkit-scrollbar-thumb:hover': {
+            backgroundColor: '#aeb4b8'
+          }
+        }
+      }
+    },
     MuiButton: {
       styleOverrides: {
         root: {
-          textTransform: 'none'
+          textTransform: 'none',
+          '.MuiButton-endIcon': {
+            marginLeft: 0
+          }
         }
       }
     },
