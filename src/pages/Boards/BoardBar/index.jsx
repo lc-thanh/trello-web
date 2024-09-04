@@ -13,15 +13,15 @@ import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt'
 
 const CHIP_STYLES = {
   border: 'none',
-  color: 'primary.main',
+  color: 'appBarPrimary.main',
   paddingX: '5px',
   borderRadius: '4px',
   fontWeight: '500',
   '&.MuiChip-clickable:hover': {
-    backgroundColor: 'primary.50'
+    backgroundColor: 'appBarPrimary.50'
   },
-  '& .MuiSvgIcon-root': {
-    color: 'primary.main'
+  '.MuiSvgIcon-root': {
+    color: 'appBarPrimary.main'
   }
 }
 
@@ -30,10 +30,12 @@ function BoardBar() {
     <Box sx={{
       width: '100%',
       height: (theme) => theme.trello.boardBarHeight,
+      bgcolor: (theme) => (theme.palette.mode === 'dark') ? '#34495e' : '#1976d2',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-between',
-      borderTop: '1px solid #009688',
+      borderBottom: '1px solid',
+      borderColor: 'appBarPrimary.main',
       gap: 2,
       paddingX: 2,
       overflowX: 'auto'
@@ -77,15 +79,18 @@ function BoardBar() {
       </Box>
 
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-        <Button variant="outlined" startIcon={<PersonAddAltIcon />}>
+        <Button color="appBarPrimary" variant="outlined" startIcon={<PersonAddAltIcon />}>
           Invite
         </Button>
         <AvatarGroup
           max={4}
           sx={{
             '& .MuiAvatar-root': {
-              width: 34,
-              height: 34
+              width: 32,
+              height: 32,
+              border: '2px solid',
+              borderColor: 'appBarPrimary.main',
+              cursor: 'pointer'
             }
           }}
         >
@@ -96,13 +101,13 @@ function BoardBar() {
             <Avatar alt="Tony Stark" src="https://i.imgur.com/5hbLSJb.jpeg" />
           </Tooltip>
           <Tooltip title="Cindy Baker">
-            <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
+            <Avatar alt="Cindy Baker" src="#" />
           </Tooltip>
           <Tooltip title="Agnes Walker">
-            <Avatar alt="Agnes Walker" src="/static/images/avatar/4.jpg" />
+            <Avatar alt="Agnes Walker" src="" />
           </Tooltip>
           <Tooltip title="Trevor Henderson">
-            <Avatar alt="Trevor Henderson" src="/static/images/avatar/5.jpg" />
+            <Avatar alt="Trevor Henderson" src="" />
           </Tooltip>
         </AvatarGroup>
       </Box>
