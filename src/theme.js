@@ -1,6 +1,7 @@
 import { experimental_extendTheme as extendTheme } from '@mui/material/styles'
-import { blueGrey, teal, deepOrange, orange } from '@mui/material/colors'
+// import { teal, deepOrange, orange } from '@mui/material/colors'
 
+// https://flatuicolors.com/palette/defo
 const theme = extendTheme({
   trello: {
     appBarHeight: '58px',
@@ -9,14 +10,36 @@ const theme = extendTheme({
   colorSchemes: {
     light: {
       palette: {
-        primary: teal,
-        secondary: deepOrange
+        appBarPrimary: {
+          main: '#fff',
+          50: 'rgba(255, 255, 255, 0.1)',
+          light: 'rgba(255, 255, 255, 0.5)',
+          dark: '#f0f0f0'
+        }
+        // primary: teal,
+        // secondary: deepOrange,
+        // background: {
+        //   default: '#fff'
+        // }
       }
     },
     dark: {
       palette: {
-        primary: blueGrey,
-        secondary: orange
+        appBarPrimary: {
+          main: '#fff',
+          50: 'rgba(255, 255, 255, 0.2)',
+          light: 'rgba(255, 255, 255, 0.5)',
+          dark: '#f0f0f0'
+        },
+        // primary: {
+        //   main: '#DDE6ED',
+        //   50: 'rgba(221, 230, 237, 0.2)',
+        //   contrastText: '#27374D'
+        // },
+        // secondary: orange,
+        background: {
+          paper: '#1f2b3d'
+        }
       }
     }
   },
@@ -50,28 +73,37 @@ const theme = extendTheme({
     },
     MuiInputLabel: {
       styleOverrides: {
-        root: ({ theme }) => ({
-          color: theme.palette.primary.main,
+        root: {
           fontSize: '0.875rem'
-        })
+          // color: theme.palette.primary.main,
+        }
       }
     },
     MuiOutlinedInput: {
       styleOverrides: {
-        root: ({ theme }) => ({
-          color: theme.palette.primary.main,
-          fontSize: '0.875rem',
-          '.MuiOutlinedInput-notchedOutline': {
-            borderColor: theme.palette.primary.light
-          },
-          '&:hover': {
-            '.MuiOutlinedInput-notchedOutline': {
-              borderColor: theme.palette.primary.main
-            }
-          }
+        root: {
+          fontSize: '0.875rem'
+          // color: theme.palette.primary.main,
+          // '.MuiOutlinedInput-notchedOutline': {
+          //   borderColor: theme.palette.primary.light
+          // },
+          // '&:hover': {
+          //   '.MuiOutlinedInput-notchedOutline': {
+          //     borderColor: theme.palette.primary.main
+          //   }
+          // }
           // '& fieldset': {
           //   borderWidth: '1px !important'
           // }
+        }
+      }
+    },
+    MuiAvatar: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          color: theme.palette.appBarPrimary.main,
+          backgroundColor: '#a4b0be',
+          fontSize: '1rem'
         })
       }
     }
