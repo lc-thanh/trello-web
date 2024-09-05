@@ -1,11 +1,16 @@
 import { experimental_extendTheme as extendTheme } from '@mui/material/styles'
 // import { teal, deepOrange, orange } from '@mui/material/colors'
 
+const APP_BAR_HEIGHT = '58px'
+const BOARD_BAR_HEIGHT = '60px'
+const BOARD_CONTENT_HEIGHT = `calc(100vh - ${APP_BAR_HEIGHT} - ${BOARD_BAR_HEIGHT})`
+
 // https://flatuicolors.com/palette/defo
 const theme = extendTheme({
   trello: {
-    appBarHeight: '58px',
-    boardBarHeight: '60px'
+    appBarHeight: APP_BAR_HEIGHT,
+    boardBarHeight: BOARD_BAR_HEIGHT,
+    boardContentHeight: BOARD_CONTENT_HEIGHT
   },
   colorSchemes: {
     light: {
@@ -79,6 +84,15 @@ const theme = extendTheme({
         }
       }
     },
+    MuiTypography: {
+      styleOverrides: {
+        root: {
+          '&.MuiTypography-body1': {
+            fontSize: '0.875rem'
+          }
+        }
+      }
+    },
     MuiOutlinedInput: {
       styleOverrides: {
         root: {
@@ -105,6 +119,37 @@ const theme = extendTheme({
           backgroundColor: '#a4b0be',
           fontSize: '1rem'
         })
+      }
+    },
+    MuiMenuItem: {
+      styleOverrides: {
+        root: {
+          '.MuiTypography-root': {
+            fontSize: '0.875rem'
+          },
+          '& .MuiListItemIcon-root': {
+            minWidth: '28px'
+          }
+        }
+      }
+    },
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          cursor: 'pointer',
+          boxShadow: '0 1px 1px rgba(0, 0, 0, 0.2)',
+          overflow: 'unset', // Cái này để bỏ ngăn chặn thanh scroll ở trong Column Content
+          '.MuiCardMedia-root': {
+            height: 140
+          },
+          '.MuiCardContent-root': {
+            padding: '12px',
+            '&:last-child': { padding: '12px' }
+          },
+          '.MuiCardActions-root': {
+            padding: '0 4px 8px 4px'
+          }
+        }
       }
     }
   }

@@ -30,12 +30,10 @@ function BoardBar() {
     <Box sx={{
       width: '100%',
       height: (theme) => theme.trello.boardBarHeight,
-      bgcolor: (theme) => (theme.palette.mode === 'dark') ? '#34495e' : '#1976d2',
+      bgcolor: (theme) => (theme.palette.mode === 'dark') ? '#223450' : '#015EDD',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-between',
-      borderBottom: '1px solid',
-      borderColor: 'appBarPrimary.main',
       gap: 2,
       paddingX: 2,
       overflowX: 'auto'
