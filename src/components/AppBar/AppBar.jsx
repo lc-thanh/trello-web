@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Box from '@mui/material/Box'
-import ModeSelect from '~/components/ModeSelect'
+import ModeSelect from '~/components/ModeSelect/ModeSelect'
 import AppsIcon from '@mui/icons-material/Apps'
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone'
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline'
@@ -26,7 +26,7 @@ function AppBar() {
     <Box sx={{
       width: '100%',
       height: (theme) => theme.trello.appBarHeight,
-      bgcolor: (theme) => (theme.palette.mode === 'dark') ? '#2c3e50' : '#1565c0',
+      bgcolor: (theme) => (theme.palette.mode === 'dark') ? '#1C2A40' : '#024DC5',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-between',
@@ -79,7 +79,11 @@ function AppBar() {
             endAdornment: (
               <CloseIcon
                 fontSize="small"
-                sx={{ color: searchValue ? 'appBarPrimary.main' : 'transparent', cursor: 'pointer' }}
+                sx={{
+                  color: 'appBarPrimary.main',
+                  display: searchValue ? 'block' : 'none',
+                  cursor: 'pointer'
+                }}
                 onClick={() => setSearchValue('')}
               />
             )
