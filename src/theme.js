@@ -4,13 +4,17 @@ import { experimental_extendTheme as extendTheme } from '@mui/material/styles'
 const APP_BAR_HEIGHT = '58px'
 const BOARD_BAR_HEIGHT = '60px'
 const BOARD_CONTENT_HEIGHT = `calc(100vh - ${APP_BAR_HEIGHT} - ${BOARD_BAR_HEIGHT})`
+const COLUMN_HEADER_HEIGHT = '50px'
+const COLUMN_FOOTER_HEIGHT = '56px'
 
 // https://flatuicolors.com/palette/defo
 const theme = extendTheme({
   trello: {
     appBarHeight: APP_BAR_HEIGHT,
     boardBarHeight: BOARD_BAR_HEIGHT,
-    boardContentHeight: BOARD_CONTENT_HEIGHT
+    boardContentHeight: BOARD_CONTENT_HEIGHT,
+    columnHeaderHeight: COLUMN_HEADER_HEIGHT,
+    columnFooterHeight: COLUMN_FOOTER_HEIGHT
   },
   colorSchemes: {
     light: {
@@ -140,7 +144,8 @@ const theme = extendTheme({
           boxShadow: '0 1px 1px rgba(0, 0, 0, 0.2)',
           overflow: 'unset', // Cái này để bỏ ngăn chặn thanh scroll ở trong Column Content
           '.MuiCardMedia-root': {
-            height: 140
+            height: 140,
+            borderRadius: '4px 4px 0 0'
           },
           '.MuiCardContent-root': {
             padding: '12px',
