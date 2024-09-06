@@ -10,6 +10,7 @@ import AvatarGroup from '@mui/material/AvatarGroup'
 import Tooltip from '@mui/material/Tooltip'
 import Button from '@mui/material/Button'
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt'
+import { capitalizeFirstLetter } from '~/utils/formatters'
 
 const CHIP_STYLES = {
   border: 'none',
@@ -25,7 +26,7 @@ const CHIP_STYLES = {
   }
 }
 
-function BoardBar() {
+function BoardBar({ board }) {
   return (
     <Box sx={{
       width: '100%',
@@ -41,14 +42,14 @@ function BoardBar() {
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
         <Chip
           icon={<DashboardIcon />}
-          label="MERN Stack Board"
+          label={board?.title}
           variant="outlined"
           clickable
           sx={CHIP_STYLES}
         />
         <Chip
           icon={<VpnLockIcon />}
-          label="Public/Private Workspace"
+          label={`${capitalizeFirstLetter(board?.type)} Workspace`}
           variant="outlined"
           clickable
           sx={CHIP_STYLES}

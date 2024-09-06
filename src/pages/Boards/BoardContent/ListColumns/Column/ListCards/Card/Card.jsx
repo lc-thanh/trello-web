@@ -8,31 +8,30 @@ import GroupIcon from '@mui/icons-material/Group'
 import CommentIcon from '@mui/icons-material/Comment'
 import AttachmentIcon from '@mui/icons-material/Attachment'
 
-function Card({ temporaryHideMedia }) {
-  if (temporaryHideMedia) {
-    return (
-      <MuiCard>
-        <CardContent>
-          <Typography>Not Media Card</Typography>
-        </CardContent>
-      </MuiCard>
-    )
-  }
+function Card({ card }) {
+  const haveCardAction = () => !!card?.memberIds.length || !!card?.comments.length || !!card?.attachments.length
 
   return (
     <MuiCard>
-      <CardMedia
-        image="https://images5.alphacoders.com/112/1129255.jpg"
-        title="green iguana"
-      />
+      {
+        !!card?.cover && typeof card?.cover === 'string' &&
+          <CardMedia
+            image={card?.cover}
+            // image="https://images5.alphacoders.com/112/1129255.jpg"
+            // title="green iguana"
+          />
+      }
       <CardContent>
-        <Typography>Black Myth: Wukong</Typography>
+        <Typography>{card?.title}</Typography>
       </CardContent>
-      <CardActions>
-        <Button size="small" startIcon={<GroupIcon />}>10</Button>
-        <Button size="small" startIcon={<CommentIcon />}>15</Button>
-        <Button size="small" startIcon={<AttachmentIcon />}>20</Button>
-      </CardActions>
+      {
+        haveCardAction() &&
+          <CardActions>
+            {!!card?.memberIds.length && <Button size="small" startIcon={<GroupIcon />}>{card?.memberIds.length}</Button>}
+            {!!card?.comments.length && <Button size="small" startIcon={<CommentIcon />}>{card?.comments.length}</Button>}
+            {!!card?.attachments.length && <Button size="small" startIcon={<AttachmentIcon />}>{card?.attachments.length}</Button>}
+          </CardActions>
+      }
     </MuiCard>
   )
 }
