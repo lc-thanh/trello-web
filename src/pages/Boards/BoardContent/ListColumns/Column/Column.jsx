@@ -17,8 +17,11 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import ListCards from './ListCards/ListCards'
+import { mapOrder } from '~/utils/sorts'
 
-function Column() {
+function Column({ column }) {
+  const orderedCards = mapOrder(column?.cards, column?.cardOrderIds, '_id')
+
   const [anchorEl, setAnchorEl] = React.useState(null)
   const open = Boolean(anchorEl)
   const handleClick = (event) => {
@@ -54,7 +57,7 @@ function Column() {
             cursor: 'pointer'
           }}
         >
-          Column 01 title
+          {column?.title}
         </Typography>
         {/* Context Menu */}
         <Box>
@@ -109,7 +112,7 @@ function Column() {
       </Box>
 
       {/* Column Content */}
-      <ListCards />
+      <ListCards cards={orderedCards} />
 
       {/* Column Footer */}
       <Box sx={{
