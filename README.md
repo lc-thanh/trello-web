@@ -3,18 +3,16 @@
 # Tôi đã học được những gì trong khóa thực hành Front-end này?
 
 # Mục lục
-- [Tôi đã học được những gì trong khóa thực hành Front-end này?](#tôi-đã-học-được-những-gì-trong-khóa-thực-hành-front-end-này)
-- [Mục lục](#mục-lục)
-  - [I. ReactJS Notes](#i-reactjs-notes)
-    - [1. Sử dụng { function() } trong JSX để sinh phần tử html](#1-sử-dụng--function--trong-jsx-để-sinh-phần-tử-html)
-    - [2. Sử dụng '&&' cho Conditional Rendering rất tiện nhưng KHÔNG an toàn](#2-sử-dụng--cho-conditional-rendering-rất-tiện-nhưng-không-an-toàn)
-    - [3. Sự giống và khác nhau giữa findIndex() và indexOf()](#3-sự-giống-và-khác-nhau-giữa-findindex-và-indexof)
-    - [4. slice() và splice()](#4-slice-và-splice)
-  - [II. JavaScript Notes](#ii-javascript-notes)
-    - [1. Cách để chạy một lambda function](#1-cách-để-chạy-một-lambda-function)
-    - [2. Optional chaining operator (?.) trong JS](#2-optional-chaining-operator--trong-js)
-  - [III. HTML, CSS Notes](#iii-html-css-notes)
-    - [1. Sử dụng calc() trong CSS để tính toán khoảng cách cho phần tử](#1-sử-dụng-calc-trong-css-để-tính-toán-khoảng-cách-cho-phần-tử)
+- [I. ReactJS Notes](#i-reactjs-notes)
+  - [1. Sử dụng { function() } trong JSX để sinh phần tử html](#1-sử-dụng--function--trong-jsx-để-sinh-phần-tử-html)
+  - [2. Sử dụng '&&' cho Conditional Rendering rất tiện nhưng KHÔNG an toàn](#2-sử-dụng--cho-conditional-rendering-rất-tiện-nhưng-không-an-toàn)
+- [II. JavaScript Notes](#ii-javascript-notes)
+  - [1. Cách để chạy một lambda function](#1-cách-để-chạy-một-lambda-function)
+  - [2. Optional chaining operator (?.) trong JS](#2-optional-chaining-operator--trong-js)
+  - [3. Sự giống và khác nhau giữa findIndex() và indexOf()](#3-sự-giống-và-khác-nhau-giữa-findindex-và-indexof)
+  - [4. slice() và splice()](#4-slice-và-splice)
+- [III. HTML, CSS Notes](#iii-html-css-notes)
+  - [1. Sử dụng calc() trong CSS để tính toán khoảng cách cho phần tử](#1-sử-dụng-calc-trong-css-để-tính-toán-khoảng-cách-cho-phần-tử)
 
 
 ## I. ReactJS Notes
