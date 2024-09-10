@@ -8,6 +8,8 @@
   - [I. ReactJS Notes](#i-reactjs-notes)
     - [1. Sử dụng { function() } trong JSX để sinh phần tử html](#1-sử-dụng--function--trong-jsx-để-sinh-phần-tử-html)
     - [2. Sử dụng '&&' cho Conditional Rendering rất tiện nhưng KHÔNG an toàn](#2-sử-dụng--cho-conditional-rendering-rất-tiện-nhưng-không-an-toàn)
+    - [3. Sự giống và khác nhau giữa findIndex() và indexOf()](#3-sự-giống-và-khác-nhau-giữa-findindex-và-indexof)
+    - [4. slice() và splice()](#4-slice-và-splice)
   - [II. JavaScript Notes](#ii-javascript-notes)
     - [1. Cách để chạy một lambda function](#1-cách-để-chạy-một-lambda-function)
     - [2. Optional chaining operator (?.) trong JS](#2-optional-chaining-operator--trong-js)
@@ -111,7 +113,9 @@ Các biểu thức Falsy values:
 // string - this won't render anything ✅
 {"" && <p>😸</p>}
 ```
-Vậy nên: phải ép kiểu về Boolean trước!
+Như đã thấy ở ví dụ trên, những biểu thức **Falsy conditions** đã làm cho React render ra những thứ mà nó không nên render.
+
+Để khắc phục điều đó, ta phải ép kiểu về Boolean trước!
 
 Có 2 cách để ép kiểu:
 
@@ -215,7 +219,72 @@ console.log(dogName);
 console.log(adventurer.someNonExistentMethod?.());
 // Expected output: undefined
 ```
+### 3. Sự giống và khác nhau giữa findIndex() và indexOf()
+- Giống nhau: Cả hai đều trả về index **đầu tiên** của một phần tử được tìm thấy trong **Array**
 
+- Khác nhau: Nhưng cả 2 lại khác nhau về tham số và đối số đầu vào:
+
+  - Tham số đầu vào findIndex() là một function:
+  ```js
+  const array1 = [5, 12, 8, 130, 44];
+
+  const isLargeNumber = (element) => element > 13;
+
+  console.log(array1.findIndex(isLargeNumber));
+  // Expected output: 3
+  ```
+  - Trong khi đó, tham số đầu vào của indexOf() là một giá trị cụ thể:
+  ```js
+  var myArrayOfStrings = ['this', 'is', 'my', 'array', 'of', 'strings'];
+
+  console.log(myArrayOfStrings.indexOf('my')); 
+  // Expected output: 2
+  ```
+
+### 4. slice() và splice()
+
+Thuật toán di chuyển phần tử trong mảng của [dnd kit](https://dndkit.com/) có sử dụng slice() và splice(): https://github.com/clauderic/dnd-kit/blob/master/packages/sortable/src/utilities/arrayMove.ts
+
+- ```slice(start, end)``` trả về [shallow copy](https://developer.mozilla.org/en-US/docs/Glossary/Shallow_copy) của một phần trong một mảng từ **start** đến **end** (nhưng KHÔNG chứa **end**)
+
+```js
+const animals = ['ant', 'bison', 'camel', 'duck', 'elephant'];
+
+console.log(animals.slice(2));
+// Expected output: Array ["camel", "duck", "elephant"]
+
+console.log(animals.slice(2, 4));
+// Expected output: Array ["camel", "duck"]
+
+console.log(animals.slice(1, 5));
+// Expected output: Array ["bison", "camel", "duck", "elephant"]
+
+console.log(animals.slice(-2));
+// Expected output: Array ["duck", "elephant"]
+
+console.log(animals.slice(2, -1));
+// Expected output: Array ["camel", "duck"]
+
+console.log(animals.slice());
+// Expected output: Array ["ant", "bison", "camel", "duck", "elephant"]
+```
+
+Giá trị index âm? => tính từ cuối mảng lên đầu mảng
+
+- ```splice(start, deleteCount, item1, item2, ..., itemN)``` thay đổi một mảng bằng cách xóa, hoặc thay thể các phần tử trong mảng
+
+```js
+const months = ['Jan', 'March', 'April', 'June'];
+months.splice(1, 0, 'Feb');
+// Inserts at index 1
+console.log(months);
+// Expected output: Array ["Jan", "Feb", "March", "April", "June"]
+
+months.splice(4, 1, 'May');
+// Replaces 1 element at index 4
+console.log(months);
+// Expected output: Array ["Jan", "Feb", "March", "April", "May"]
+```
 
 ## III. HTML, CSS Notes
 

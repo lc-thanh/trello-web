@@ -19,7 +19,26 @@ import ListItemText from '@mui/material/ListItemText'
 import ListCards from './ListCards/ListCards'
 import { mapOrder } from '~/utils/sorts'
 
+import { useSortable } from '@dnd-kit/sortable'
+import { CSS } from '@dnd-kit/utilities'
+
 function Column({ column }) {
+  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
+    id: column._id,
+    data: { ...column }
+  })
+
+  const dndKitColumnStyles = {
+    // Để tối ưu cho kéo thả trên mobile
+    // touchAction: 'none', // Nhưng dành cho PointerSensor (để tối ưu hơn nữa thì nên dùng MouseSensor và TouchSensor)
+
+    // Nếu sử dụng CSS.Transform như docs sẽ bị lỗi kiểu stretch
+    // Video: https://youtu.be/IttteelPx-k?t=1244
+    // https://github.com/clauderic/dnd-kit/issues/117
+    transform: CSS.Translate.toString(transform),
+    transition
+  }
+
   const orderedCards = mapOrder(column?.cards, column?.cardOrderIds, '_id')
 
   const [anchorEl, setAnchorEl] = React.useState(null)
@@ -32,15 +51,21 @@ function Column({ column }) {
   }
 
   return (
-    <Box sx={{
-      minWidth: '300px',
-      maxWidth: '300px',
-      bgcolor: (theme) => (theme.palette.mode === 'dark') ? '#212335' : '#ebecf0',
-      ml: 2,
-      borderRadius: '6px',
-      height: 'fit-content',
-      maxHeight: (theme) => `calc(${theme.trello.boardContentHeight} - ${theme.spacing(5)})`
-    }}>
+    <Box
+      ref={setNodeRef}
+      style={dndKitColumnStyles}
+      {...attributes}
+      {...listeners}
+      sx={{
+        minWidth: '300px',
+        maxWidth: '300px',
+        bgcolor: (theme) => (theme.palette.mode === 'dark') ? '#212335' : '#ebecf0',
+        ml: 2,
+        borderRadius: '6px',
+        height: 'fit-content',
+        maxHeight: (theme) => `calc(${theme.trello.boardContentHeight} - ${theme.spacing(5)})`
+      }}
+    >
       {/* Column Header */}
       <Box sx={{
         height: (theme) => theme.trello.columnHeaderHeight,
