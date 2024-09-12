@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import Box from '@mui/material/Box'
 import ListColumns from './ListColumns/ListColumns'
+import Column from './ListColumns/Column/Column'
+import Card from './ListColumns/Column/ListCards/Card/Card'
 import { mapOrder } from '~/utils/sorts'
 import {
   DndContext,
@@ -8,11 +10,18 @@ import {
   MouseSensor,
   TouchSensor,
   useSensor,
-  useSensors
+  useSensors,
+  DragOverlay,
+  defaultDropAnimationSideEffects
 } from '@dnd-kit/core'
 import { arrayMove } from '@dnd-kit/sortable'
+import { ACTIVE_ITEM_TYPE } from '~/utils/constants'
 
 function BoardContent({ board }) {
+  const [activeItemId, setActiveItemId] = useState(null)
+  const [activeItemType, setActiveItemType] = useState(null)
+  const [activeItemData, setActiveItemData] = useState(null)
+
   const [orderedColumns, setOrderedColumns] = useState([])
   useEffect(() => {
     // Lấy dữ liệu các columns từ mock-data và sắp xếp chúng dựa theo mảng columnOrderIds
@@ -30,9 +39,21 @@ function BoardContent({ board }) {
   const touchSensor = useSensor(TouchSensor, { activationConstraint: { delay: 250, tolerance: 5 } })
   const sensor = useSensors(mouseSensor, touchSensor)
 
+  // Xử lý sự kiện khi bắt đầu kéo
+  const handleDragStart = (event) => {
+    console.log('handleDragStart: ', event)
+    setActiveItemId(event?.active?.id)
+    setActiveItemType(event?.active?.data?.current?.type)
+    setActiveItemData(event?.active?.data?.current?.itemData)
+  }
+  console.log('activeItemData: ', activeItemData)
+
+  const handleDragOver = (event) => {
+  }
+
   // Xử lý sự kiện sau khi kéo xong
   const handleDragEnd = (event) => {
-    console.log('handleDragEnd: ', event)
+    // console.log('handleDragEnd: ', event)
     const { active, over } = event
 
     // Nếu kéo ra ngoài, thì over sẽ bị null, lúc này không cần xử lý gì hết
@@ -53,10 +74,31 @@ function BoardContent({ board }) {
 
       setOrderedColumns(dndOrderedColumns)
     }
+
+    setActiveItemId(null)
+    setActiveItemType(null)
+    setActiveItemData(null)
+  }
+
+  const dropAnimation = {
+    sideEffects: defaultDropAnimationSideEffects({
+      styles: {
+        active: {
+          opacity: '0.5'
+        }
+      }
+    })
   }
 
   return (
-    <DndContext onDragEnd={handleDragEnd} sensors={sensor}>
+    // Cách nest chuẩn các context của dnd-kit
+    // https://docs.dndkit.com/presets/sortable/sortable-context#usage
+    <DndContext
+      sensors={sensor}
+      onDragStart={handleDragStart}
+      onDragOver={handleDragOver}
+      onDragEnd={handleDragEnd}
+    >
       <Box sx={{
         width: '100%',
         height: (theme) => theme.trello.boardContentHeight,
@@ -64,6 +106,13 @@ function BoardContent({ board }) {
         p: '10px 0'
       }}>
         <ListColumns columns={orderedColumns} />
+        <DragOverlay dropAnimation={dropAnimation}>
+          {activeItemId ?
+            activeItemType === ACTIVE_ITEM_TYPE.COLUMN ?
+              <Column column={activeItemData} /> : <Card card={activeItemData} />
+            : null
+          }
+        </DragOverlay>
       </Box>
     </DndContext>
   )

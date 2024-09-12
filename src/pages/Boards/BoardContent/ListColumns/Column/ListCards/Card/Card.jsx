@@ -8,11 +8,40 @@ import GroupIcon from '@mui/icons-material/Group'
 import CommentIcon from '@mui/icons-material/Comment'
 import AttachmentIcon from '@mui/icons-material/Attachment'
 
+import { useSortable } from '@dnd-kit/sortable'
+import { CSS } from '@dnd-kit/utilities'
+import { ACTIVE_ITEM_TYPE } from '~/utils/constants'
+
 function Card({ card }) {
   const haveCardAction = () => !!card?.memberIds.length || !!card?.comments.length || !!card?.attachments.length
 
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
+    id: card._id,
+    data: {
+      type: ACTIVE_ITEM_TYPE.CARD,
+      itemData: { ...card }
+    }
+  })
+
+  const dndKitCardStyles = {
+    // Để tối ưu cho kéo thả trên mobile
+    // touchAction: 'none', // Nhưng dành cho PointerSensor (để tối ưu hơn nữa thì nên dùng MouseSensor và TouchSensor)
+
+    // Nếu sử dụng CSS.Transform như docs sẽ bị lỗi kiểu stretch
+    // Video: https://youtu.be/IttteelPx-k?t=1244
+    // https://github.com/clauderic/dnd-kit/issues/117
+    transform: CSS.Translate.toString(transform),
+    transition,
+    opacity: isDragging ? 0.5 : undefined
+  }
+
   return (
-    <MuiCard>
+    <MuiCard
+      ref={setNodeRef}
+      style={dndKitCardStyles}
+      {...attributes}
+      {...listeners}
+    >
       {
         !!card?.cover && typeof card?.cover === 'string' &&
           <CardMedia
