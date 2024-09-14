@@ -12,6 +12,7 @@
   - [2. Optional chaining operator (?.) trong JS](#2-optional-chaining-operator--trong-js)
   - [3. Sự giống và khác nhau giữa findIndex() và indexOf()](#3-sự-giống-và-khác-nhau-giữa-findindex-và-indexof)
   - [4. slice() và splice()](#4-slice-và-splice)
+  - [5. Deep clone một array/object trong JS bằng Lodash](#5-deep-clone-một-arrayobject-trong-js-bằng-lodash)
 - [III. HTML, CSS Notes](#iii-html-css-notes)
   - [1. Sử dụng calc() trong CSS để tính toán khoảng cách cho phần tử](#1-sử-dụng-calc-trong-css-để-tính-toán-khoảng-cách-cho-phần-tử)
 
@@ -459,6 +460,25 @@ months.splice(4, 1, 'May');
 // Replaces 1 element at index 4
 console.log(months);
 // Expected output: Array ["Jan", "Feb", "March", "April", "May"]
+```
+
+### 5. Deep clone một array/object trong JS bằng Lodash
+
+Trong [video này](https://youtu.be/HLBQXmrbHbE?list=PLP6tw4Zpj-RJP2-YrhtkWqObMQ-AA4TDy&t=2621), tác giả đã sử dụng Lodash.
+
+Đầu tiên phải cài package:
+```
+yarn add lodash
+```
+
+Tiếp theo, import thư viện vào:
+```js
+import { cloneDeep } from 'lodash'
+```
+
+Và sử dụng:
+```js
+const nextColumns = cloneDeep(prevColumns)
 ```
 
 ## III. HTML, CSS Notes
