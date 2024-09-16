@@ -21,11 +21,15 @@ import { mapOrder } from '~/utils/sorts'
 
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
+import { ACTIVE_ITEM_TYPE } from '~/utils/constants'
 
 function Column({ column }) {
-  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
-    id: column._id,
-    data: { ...column }
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
+    id: column?._id,
+    data: {
+      type: ACTIVE_ITEM_TYPE.COLUMN,
+      itemData: { ...column }
+    }
   })
 
   const dndKitColumnStyles = {
@@ -36,7 +40,8 @@ function Column({ column }) {
     // Video: https://youtu.be/IttteelPx-k?t=1244
     // https://github.com/clauderic/dnd-kit/issues/117
     transform: CSS.Translate.toString(transform),
-    transition
+    transition,
+    opacity: isDragging ? 0.5 : undefined
   }
 
   const orderedCards = mapOrder(column?.cards, column?.cardOrderIds, '_id')
